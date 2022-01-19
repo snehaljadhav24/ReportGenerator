@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import sys
-import csv
+#import csv
 import mysql.connector as mysql
 import pandas as pd
 
 excel = sys.argv[1]
 
 
-mydb = mysql.connect(host="127.0.0.1", user="root",
+mydb = mysql.connect(host="localhost", user="root",
                      password="root", database="employee")
 
 # all_value = []
@@ -29,6 +29,12 @@ name_list = df['Name'].tolist()
 for i in name_list:
     if(any(char.isdigit() for char in i)):
         sys.exit("The Name column with name: " +
+                 i + " has a numeric entry into it, Please correct it.\n")
+
+surname_list = df['Surname'].tolist()
+for i in surname_list:
+    if(any(char.isdigit() for char in i)):
+        sys.exit("The Surame column with surname: " +
                  i + " has a numeric entry into it, Please correct it.\n")
 
 mycursor = mydb.cursor()
